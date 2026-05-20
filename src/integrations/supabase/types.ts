@@ -14,16 +14,291 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          client_id: string
+          created_at: string
+          created_by: string | null
+          end_at: string
+          id: string
+          notes: string | null
+          package_id: string | null
+          price: number
+          room_id: string
+          service_id: string
+          start_at: string
+          status: Database["public"]["Enums"]["appointment_status"]
+          therapist_id: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          created_by?: string | null
+          end_at: string
+          id?: string
+          notes?: string | null
+          package_id?: string | null
+          price?: number
+          room_id: string
+          service_id: string
+          start_at: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          therapist_id: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          created_by?: string | null
+          end_at?: string
+          id?: string
+          notes?: string | null
+          package_id?: string | null
+          price?: number
+          room_id?: string
+          service_id?: string
+          start_at?: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          therapist_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      packages: {
+        Row: {
+          amount_paid: number
+          client_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          service_id: string | null
+          sold_by: string | null
+          total_price: number
+          total_sessions: number
+        }
+        Insert: {
+          amount_paid?: number
+          client_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          service_id?: string | null
+          sold_by?: string | null
+          total_price: number
+          total_sessions: number
+        }
+        Update: {
+          amount_paid?: number
+          client_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          service_id?: string | null
+          sold_by?: string | null
+          total_price?: number
+          total_sessions?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "packages_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "packages_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          id: string
+          note: string | null
+          package_id: string
+          paid_at: string
+          recorded_by: string | null
+        }
+        Insert: {
+          amount: number
+          id?: string
+          note?: string | null
+          package_id: string
+          paid_at?: string
+          recorded_by?: string | null
+        }
+        Update: {
+          amount?: number
+          id?: string
+          note?: string | null
+          package_id?: string
+          paid_at?: string
+          recorded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "packages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      rooms: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          default_price: number
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          default_price?: number
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          default_price?: number
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "therapist"
+      appointment_status: "scheduled" | "done" | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +425,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "therapist"],
+      appointment_status: ["scheduled", "done", "cancelled"],
+    },
   },
 } as const
