@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, Package, BarChart3, LogOut, LayoutDashboard, UserCog } from "lucide-react";
+import { Calendar, Users, LogOut, LayoutDashboard, Euro } from "lucide-react";
 import type { ReactNode } from "react";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -10,12 +10,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   const nav = useNavigate();
 
   const links = [
-    { to: "/", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { to: "/calendar", label: "Calendar", icon: Calendar },
     { to: "/clients", label: "Clients", icon: Users },
-    { to: "/packages", label: "Packages", icon: Package },
-    { to: "/stats", label: "Statistics", icon: BarChart3 },
-    ...(isAdmin ? [{ to: "/staff", label: "Staff", icon: UserCog }] : []),
+    { to: "/revenue", label: isAdmin ? "Revenue" : "My revenue", icon: Euro },
   ];
 
   return (
@@ -28,11 +26,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         <nav className="flex-1 p-3 space-y-1">
           {links.map((l) => {
             const Icon = l.icon;
-            const active = loc.pathname === l.to || (l.to !== "/" && loc.pathname.startsWith(l.to));
+            const active = loc.pathname === l.to || loc.pathname.startsWith(l.to + "/");
             return (
               <Link
                 key={l.to}
-                to={l.to}
+                to={l.to as any}
                 className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
                   active
                     ? "bg-primary/15 text-primary border border-primary/30"
