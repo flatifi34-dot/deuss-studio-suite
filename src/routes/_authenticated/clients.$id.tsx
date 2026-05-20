@@ -227,9 +227,8 @@ function SellPackageDialog({
     if (paid > 0 && pkg) {
       await supabase.from("payments").insert({
         package_id: pkg.id,
-        client_id: clientId,
         amount: paid,
-        received_by: userId,
+        recorded_by: userId,
       });
     }
     setBusy(false);
@@ -288,16 +287,10 @@ function PaymentDialog({
     const a = parseFloat(amount);
     if (!a || a <= 0) return toast.error("Enter a positive amount");
     setBusy(true);
-    const { data: pkg } = await supabase
-      .from("packages")
-      .select("client_id")
-      .eq("id", packageId)
-      .single();
     const { error } = await supabase.from("payments").insert({
       package_id: packageId,
-      client_id: pkg!.client_id,
       amount: a,
-      received_by: userId,
+      recorded_by: userId,
     });
     setBusy(false);
     if (error) return toast.error(error.message);
