@@ -42,6 +42,21 @@ function ClientDetail() {
           .order("created_at", { ascending: false })
       ).data ?? [],
   });
+  const { data: usedMap } = useQuery({
+    queryKey: ["pkg-usage", id],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("appointments")
+        .select("package_id")
+        .eq("client_id", id)
+        .eq("status", "done");
+      const m: Record<string, number> = {};
+      (data ?? []).forEach((a: any) => {
+        if (a.package_id) m[a.package_id] = (m[a.package_id] ?? 0) + 1;
+      });
+      return m;
+    },
+  });
   const { data: appts } = useQuery({
     queryKey: ["client-appts", id],
     queryFn: async () =>
@@ -80,7 +95,8 @@ function ClientDetail() {
           <h2 className="font-display text-2xl mb-4">Packages</h2>
           <div className="space-y-3">
             {packages?.map((p: any) => {
-              const remaining = (p.total_sessions ?? 0) - (p.sessions_used ?? 0);
+              const used = usedMap?.[p.id] ?? 0;
+              const remaining = (p.total_sessions ?? 0) - used;
               const owed = Number(p.total_price) - Number(p.amount_paid ?? 0);
               return (
                 <div key={p.id} className="rounded-md border border-border p-3">
@@ -101,7 +117,7 @@ function ClientDetail() {
                   <div className="mt-3 grid grid-cols-3 text-sm gap-2">
                     <div>
                       <div className="text-xs text-muted-foreground">Sessions</div>
-                      <div>{p.sessions_used} / {p.total_sessions} <span className="text-muted-foreground">({remaining} left)</span></div>
+                      <div>{used} / {p.total_sessions} <span className="text-muted-foreground">({remaining} left)</span></div>
                     </div>
                     <div>
                       <div className="text-xs text-muted-foreground">Paid</div>
