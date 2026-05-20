@@ -81,6 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Internal CRM for Deuss Studio Massage" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Deuss Studio — CRM" },
+      { name: "twitter:description", content: "Internal CRM for Deuss Studio Massage" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/83a3f346-e247-4a69-ab9f-369bdadb84dc/id-preview-017815c9--31ccc108-f1f3-4e46-8c51-eeeb774340fb.lovable.app-1779287393133.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/83a3f346-e247-4a69-ab9f-369bdadb84dc/id-preview-017815c9--31ccc108-f1f3-4e46-8c51-eeeb774340fb.lovable.app-1779287393133.png" },
     ],
     links: [
       {
