@@ -20,7 +20,7 @@ function ClientsPage() {
   const qc = useQueryClient();
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", notes: "" });
+  const [form, setForm] = useState({ name: "", phone: "", notes: "" });
   const [busy, setBusy] = useState(false);
 
   const { data } = useQuery({
@@ -40,7 +40,7 @@ function ClientsPage() {
     if (error) return toast.error(error.message);
     toast.success("Client added");
     setOpen(false);
-    setForm({ name: "", phone: "", email: "", notes: "" });
+    setForm({ name: "", phone: "", notes: "" });
     qc.invalidateQueries({ queryKey: ["clients"] });
   }
 
@@ -69,7 +69,7 @@ function ClientsPage() {
           >
             <div>
               <div className="font-medium">{c.name}</div>
-              <div className="text-xs text-muted-foreground">{c.phone || c.email || "—"}</div>
+              <div className="text-xs text-muted-foreground">{c.phone || "—"}</div>
             </div>
             <div className="text-xs text-primary">View →</div>
           </Link>
@@ -85,7 +85,6 @@ function ClientsPage() {
           <div className="space-y-3">
             <div><Label>Name *</Label><Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></div>
             <div><Label>Phone</Label><Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></div>
-            <div><Label>Email</Label><Input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></div>
             <div><Label>Notes</Label><Input value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} /></div>
           </div>
           <DialogFooter>
