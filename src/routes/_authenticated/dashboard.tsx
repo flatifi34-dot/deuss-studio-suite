@@ -83,7 +83,7 @@ function DashboardPage() {
   });
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <PageHeader
         title={`Hello, ${profile?.full_name ?? ""}`}
         subtitle={isAdmin ? "Studio overview" : "Your month at a glance"}

@@ -58,7 +58,7 @@ function CalendarPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <PageHeader
         title="Calendar"
         subtitle="08:00 – 20:00 · 3 rooms"
@@ -67,7 +67,7 @@ function CalendarPage() {
             <Button variant="outline" size="icon" onClick={() => shiftDay(-1)}>
               <ChevronLeft className="size-4" />
             </Button>
-            <div className="font-display text-xl w-56 text-center">
+            <div className="font-display text-base sm:text-xl w-40 sm:w-56 text-center truncate">
               {day.toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" })}
             </div>
             <Button variant="outline" size="icon" onClick={() => shiftDay(1)}>

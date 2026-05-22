@@ -45,7 +45,7 @@ function ClientsPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <PageHeader
         title="Clients"
         subtitle="Manage your client list"
