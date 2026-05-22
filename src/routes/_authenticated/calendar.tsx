@@ -58,7 +58,7 @@ function CalendarPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <PageHeader
         title="Calendar"
         subtitle="08:00 – 20:00 · 3 rooms"

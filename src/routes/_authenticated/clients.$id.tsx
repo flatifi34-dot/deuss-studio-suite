@@ -71,7 +71,7 @@ function ClientDetail() {
   });
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       <Link to="/clients" className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1 mb-4">
         <ArrowLeft className="size-4" /> Back to clients
       </Link>
