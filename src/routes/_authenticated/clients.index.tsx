@@ -12,7 +12,7 @@ import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Plus, Search } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/clients")({
+export const Route = createFileRoute("/_authenticated/clients/")({
   component: ClientsPage,
 });
 
