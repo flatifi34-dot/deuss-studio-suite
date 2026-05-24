@@ -179,27 +179,36 @@ function RowHour({
             {inSlot.map((a: any) => {
               const own = a.therapist_id === userId;
               const canEdit = own || isAdmin;
+              const therapistName = (a.profiles?.full_name ?? "").trim();
+              const firstName = therapistName.split(" ")[0]?.toLowerCase() ?? "";
+              const therapistStyles: Record<string, string> = {
+                dion: "bg-blue-500/25 border-blue-400 text-blue-50",
+                nesa: "bg-pink-500/25 border-pink-400 text-pink-50",
+                arlinda: "bg-yellow-500/25 border-yellow-400 text-yellow-50",
+                diellza: "bg-purple-500/25 border-purple-400 text-purple-50",
+              };
+              const baseStyle =
+                a.status === "cancelled"
+                  ? "bg-destructive/15 border-destructive/40 line-through"
+                  : a.status === "done"
+                  ? "bg-emerald-500/15 border-emerald-500/40"
+                  : therapistStyles[firstName] ?? "bg-primary/15 border-primary/40";
               return (
                 <button
                   key={a.id}
-                  className={`block w-full text-left p-2 text-xs ${
-                    a.status === "cancelled"
-                      ? "bg-destructive/15 border-destructive/40 line-through"
-                      : a.status === "done"
-                      ? "bg-emerald-500/15 border-emerald-500/40"
-                      : "bg-primary/15 border-primary/40"
-                  } border rounded-md ${canEdit ? "cursor-pointer" : "cursor-default opacity-90"}`}
+                  className={`flex h-full w-full flex-col items-center justify-center gap-0.5 p-2 text-xs border rounded-md ${baseStyle} ${
+                    canEdit ? "cursor-pointer" : "cursor-default opacity-90"
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     if (canEdit) onApptClick(a.id);
                   }}
                 >
-                  <div className="font-medium truncate">{a.clients?.name}</div>
-                  <div className="text-[10px] text-muted-foreground truncate">
-                    {fmtTime(a.start_at)} · {a.services?.name}
+                  <div className="font-semibold uppercase tracking-wide truncate text-center">
+                    {a.clients?.name} {therapistName ? `(${therapistName.split(" ")[0]})` : ""}
                   </div>
-                  <div className="text-[10px] text-muted-foreground truncate">
-                    {a.profiles?.full_name}
+                  <div className="text-[10px] opacity-80 truncate text-center">
+                    {fmtTime(a.start_at)} · {a.services?.name}
                   </div>
                 </button>
               );
