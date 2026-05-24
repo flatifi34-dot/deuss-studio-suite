@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
@@ -68,12 +68,6 @@ function LoginPage() {
               {busy ? "Signing in…" : "Sign in"}
             </Button>
           </form>
-          <p className="text-xs text-center text-muted-foreground mt-6">
-            First time setup?{" "}
-            <Link to="/setup" className="text-primary underline">
-              Initialize staff accounts
-            </Link>
-          </p>
         </Card>
       </div>
     </div>
