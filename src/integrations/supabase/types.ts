@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointment_history: {
+        Row: {
+          action: string
+          appointment_id: string | null
+          changed_by: string | null
+          changed_by_name: string | null
+          client_name: string | null
+          created_at: string
+          diff: Json | null
+          end_at: string | null
+          id: string
+          price: number | null
+          room_name: string | null
+          service_name: string | null
+          start_at: string | null
+          status: string | null
+          therapist_name: string | null
+        }
+        Insert: {
+          action: string
+          appointment_id?: string | null
+          changed_by?: string | null
+          changed_by_name?: string | null
+          client_name?: string | null
+          created_at?: string
+          diff?: Json | null
+          end_at?: string | null
+          id?: string
+          price?: number | null
+          room_name?: string | null
+          service_name?: string | null
+          start_at?: string | null
+          status?: string | null
+          therapist_name?: string | null
+        }
+        Update: {
+          action?: string
+          appointment_id?: string | null
+          changed_by?: string | null
+          changed_by_name?: string | null
+          client_name?: string | null
+          created_at?: string
+          diff?: Json | null
+          end_at?: string | null
+          id?: string
+          price?: number | null
+          room_name?: string | null
+          service_name?: string | null
+          start_at?: string | null
+          status?: string | null
+          therapist_name?: string | null
+        }
+        Relationships: []
+      }
       appointments: {
         Row: {
           client_id: string
