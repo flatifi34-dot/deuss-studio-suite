@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, LogOut, LayoutDashboard, Euro, Menu } from "lucide-react";
+import { Calendar, Users, LogOut, LayoutDashboard, Euro, Menu, History } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet";
 
@@ -16,6 +16,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     { to: "/calendar", label: "Calendar", icon: Calendar },
     { to: "/clients", label: "Clients", icon: Users },
     { to: "/revenue", label: isAdmin ? "Revenue" : "My revenue", icon: Euro },
+    { to: "/history", label: "History", icon: History },
   ];
 
   const NavInner = (

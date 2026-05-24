@@ -10,7 +10,6 @@ type StaffSeed = {
 
 const STAFF: StaffSeed[] = [
   { email: "admin@deuss.com", password: "admin1234", full_name: "Denisa", role: "admin" },
-  { email: "valbona@deuss.com", password: "admin1234", full_name: "Valbona", role: "admin" },
   { email: "dion@deuss.com", password: "Dion1234", full_name: "Dion", role: "therapist" },
   { email: "nesa@deuss.com", password: "Nesa1234", full_name: "Nesa", role: "therapist" },
   { email: "arlinda@deuss.com", password: "Arlinda1234", full_name: "Arlinda", role: "therapist" },
